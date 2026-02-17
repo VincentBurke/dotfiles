@@ -1,0 +1,66 @@
+# ------------------ WINDOW LOOK ------------------
+# A bit of padding + subtle transparency/blur.
+window-padding-x = 10
+window-padding-y = 10
+background-opacity = 0.92
+background-blur = 20
+
+# macOS titlebar styling (transparent is the default, but set explicitly here).
+macos-titlebar-style = transparent
+
+# ------------------ CURSOR ------------------
+# Default cursor when programs don't request one.
+# Shell integration can still switch cursor at prompts.
+cursor-style = bar
+
+# Enable option+click prompt cursor repositioning (requires shell integration + prompt marking).
+cursor-click-to-move = true
+
+# ------------------ CLIPBOARD / SAFETY ------------------
+# Prevent silent clipboard reads by terminal programs; allow writes.
+clipboard-read = ask
+clipboard-write = allow
+
+# Confirm “unsafe” pastes (e.g., multi-line pastes that could execute unexpectedly).
+clipboard-paste-protection = true
+
+# Right click behaves like many modern terminals: copy if selected, else paste.
+right-click-action = copy-or-paste
+
+# Keep title querying disabled (explicit for clarity; it’s disabled by default).
+title-report = false
+
+# ------------------ SCROLLBACK ------------------
+# In bytes. ~200MB.
+scrollback-limit = 200000000
+
+# ------------------ SHELL INTEGRATION ------------------
+# Let Ghostty inject shell integration when it detects a supported shell.
+shell-integration = detect
+
+# Keep useful behaviors, and improve SSH compatibility:
+# - ssh-env converts TERM when needed and propagates TERM_PROGRAM vars.
+shell-integration-features = cursor,title,sudo,ssh-env
+
+# ------------------ QUICK TERMINAL (DROP-DOWN) ------------------
+# Toggle Quake-style terminal anywhere with Cmd+` (backquote).
+# Note: global keybinds require granting Ghostty macOS Accessibility permissions.
+keybind = global:cmd+0=toggle_quick_terminal
+
+# ------------------ macOS KEYBOARD + SECURITY ------------------
+# Treat Option as Alt so terminal shortcuts work consistently.
+# WARNING: this breaks macOS Option-based Unicode character entry when enabled.
+macos-option-as-alt = true
+
+# Automatically enable Secure Input on detected password prompts, and show an indicator.
+macos-auto-secure-input = true
+macos-secure-input-indication = true
+
+
+
+
+# Make Cmd+N open a new tab
+keybind = cmd+n=new_tab
+
+# Optional: keep “new window” on Cmd+Shift+N
+keybind = cmd+shift+n=new_window
