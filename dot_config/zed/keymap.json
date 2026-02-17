@@ -1,0 +1,65 @@
+// Zed keymap
+//
+// For information on binding keys, see the Zed
+// documentation: https://zed.dev/docs/key-bindings
+//
+// To see the default key bindings run `zed: open default keymap`
+// from the command palette.
+[
+  {
+    "context": "vim_mode == insert && !menu",
+    "bindings": {
+      "j k": "vim::NormalBefore",
+    },
+  },
+  {
+    "context": "vim_mode == normal && !menu",
+    "bindings": {
+      "shift-h": "pane::GoBack",
+      "shift-l": "pane::GoForward",
+
+      "shift-k": "pane::ActivateNextItem",
+      "shift-j": "pane::ActivatePreviousItem",
+
+      "x": "pane::CloseActiveItem",
+      "shift-x": "pane::ReopenClosedItem",
+
+      "o": "file_finder::Toggle",
+      "t": "workspace::NewFile",
+
+      "/": "buffer_search::Deploy",
+
+      "n": "search::SelectNextMatch",
+      "shift-n": "search::SelectPreviousMatch",
+
+      "u": ["workspace::SendKeystrokes", "ctrl-u"],
+      "d": ["workspace::SendKeystrokes", "ctrl-d"],
+
+      "r": "workspace::ReloadActiveItem",
+
+      "shift-/": "zed::OpenDocs",
+    },
+  },
+  {
+    "context": "Terminal && !menu",
+    "bindings": {
+      "g g": "terminal::ScrollToTop",
+      "shift-g": "terminal::ScrollToBottom",
+
+      "u": "terminal::ScrollHalfPageUp",
+      "d": "terminal::ScrollHalfPageDown",
+
+      "k": "terminal::ScrollLineUp",
+      "j": "terminal::ScrollLineDown",
+    },
+  },
+  {
+    "context": "MarkdownPreview && !menu",
+    "bindings": {
+      "j": "markdown::ScrollDown",
+      "k": "markdown::ScrollUp",
+      "d": "markdown::ScrollPageDown",
+      "u": "markdown::ScrollPageUp",
+    },
+  },
+]

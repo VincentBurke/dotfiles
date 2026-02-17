@@ -1,0 +1,5 @@
+[user]
+	email = vincentlburke@gmail.com
+	name = Vincent Burke
+[init]
+	defaultBranch = master

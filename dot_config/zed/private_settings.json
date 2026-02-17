@@ -1,0 +1,182 @@
+// ~/.config/zed/settings.json
+{
+  // Editing ergonomics
+  "vim_mode": true,
+  "autosave": "off",
+  "auto_signature_help": true,
+
+  // Predictions
+  "edit_predictions": {
+    "provider": "zed",
+  },
+
+  // TS/JS usability
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": false,
+  },
+
+  // Practical defaults
+  "wrap_guides": [100],
+  "confirm_quit": true,
+  "load_direnv": "direct",
+
+  // Git quality-of-life
+  "git": {
+    "git_gutter": "tracked_files",
+    "inline_blame": { "delay_ms": 500, "min_column": 80 },
+  },
+
+  // UI
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark - Darkened",
+  },
+
+  // Privacy
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false,
+  },
+
+  // Language servers
+  "lsp": {
+    // Biome (formatter + fixes for JS/TS when biome.json exists)
+    "biome": {
+      "settings": {
+        "require_config_file": true,
+      },
+    },
+
+    // Tailwind CSS autocomplete/linting inside vanilla .ts strings (optional but useful)
+    "tailwindcss-language-server": {
+      "settings": {
+        "experimental": {
+          "classRegex": [
+            "\\.className\\s*[+]?=\\s*['\"]([^'\"]*)['\"]",
+            "\\.setAttributeNS\\(.*,\\s*['\"]class['\"],\\s*['\"]([^'\"]*)['\"]",
+            "\\.setAttribute\\(['\"]class['\"],\\s*['\"]([^'\"]*)['\"]",
+            "\\.classList\\.add\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.remove\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.toggle\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.contains\\(['\"]([^'\"]*)['\"]",
+            "\\.classList\\.replace\\(\\s*['\"]([^'\"]*)['\"]",
+            "\\.classList\\.replace\\([^,)]+,\\s*['\"]([^'\"]*)['\"]",
+          ],
+        },
+      },
+    },
+
+    // Zed defaults to vtsls for TS/TSX/JS; keep it and configure it here.
+    // If you hit out-of-memory on a very large repo, increase maxTsServerMemory.
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "tsserver": { "maxTsServerMemory": 8092 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false,
+            },
+            "parameterTypes": { "enabled": true },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true,
+            },
+            "propertyDeclarationTypes": { "enabled": true },
+            "functionLikeReturnTypes": { "enabled": true },
+            "enumMemberValues": { "enabled": true },
+          },
+        },
+        "javascript": {
+          "tsserver": { "maxTsServerMemory": 8092 },
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false,
+            },
+            "parameterTypes": { "enabled": true },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true,
+            },
+            "propertyDeclarationTypes": { "enabled": true },
+            "functionLikeReturnTypes": { "enabled": true },
+            "enumMemberValues": { "enabled": true },
+          },
+        },
+      },
+    },
+  },
+
+  "languages": {
+    // TS/JS: use vtsls for type-aware IDE features, use Biome for formatting + fix/organize imports
+    "TypeScript": {
+      "language_servers": ["vtsls", "!typescript-language-server", "..."],
+      "prettier": { "allowed": false },
+
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+      "tab_size": 2,
+    },
+
+    "TSX": {
+      "language_servers": ["vtsls", "!typescript-language-server", "..."],
+      "prettier": { "allowed": false },
+
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+      "tab_size": 2,
+    },
+
+    "JavaScript": {
+      "language_servers": ["vtsls", "!typescript-language-server", "..."],
+      "prettier": { "allowed": false },
+
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+      "tab_size": 2,
+    },
+
+    // Python (Ruff)
+    "Python": {
+      "language_servers": ["ruff"],
+      "format_on_save": "on",
+      "formatter": [
+        { "code_action": "source.organizeImports.ruff" },
+        { "code_action": "source.fixAll.ruff" },
+        { "language_server": { "name": "ruff" } },
+      ],
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+    },
+  },
+}

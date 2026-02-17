@@ -1,0 +1,20 @@
+#!/usr/bin/env sh
+
+# Debug: confirm this file loads on restart
+echo "loaded yabairc at $(date)" >> /tmp/yabai-yabairc.log
+
+# Keep yabai from tiling/auto-resizing layouts
+/opt/homebrew/bin/yabai -m config layout float
+
+# Remove prior signals to avoid duplicates
+/opt/homebrew/bin/yabai -m signal --remove --label maximize_focused 2>/dev/null || true
+
+# Add focus signal
+MAXIMIZE_SCRIPT="$HOME/.config/yabai/maximize-focused.sh"
+if [ -x "$MAXIMIZE_SCRIPT" ]; then
+  /opt/homebrew/bin/yabai -m signal --add label=maximize_focused event=window_focused action="$MAXIMIZE_SCRIPT"
+else
+  echo "maximize script not executable: $MAXIMIZE_SCRIPT" >> /tmp/yabai-yabairc.log
+fi
+
+exit 0

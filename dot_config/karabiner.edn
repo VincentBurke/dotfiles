@@ -1,0 +1,29 @@
+{:profiles {:Default {:default true}}
+
+ ;; Shared helpers and app conditions
+ :templates {:open "open -a '%s'"}
+ :applications {:safari ["^com\\.apple\\.Safari"]}
+
+ :main [;; Section: App-specific remaps
+        {:des "Safari only: Esc -> Option+Esc"
+         :rules [[:escape :!Oescape :safari]]}
+
+        ;; Section: Modifier behavior
+        {:des "Caps Lock: tap = Escape, hold = Hyper (Cmd+Ctrl+Opt+Shift)"
+         :rules [[:##caps_lock :!CTOleft_shift nil {:alone :escape}]]}
+
+        ;; Section: App launcher shortcuts
+        {:des "Hyper Key App Switcher"
+         :rules [[:!!1 [:open "Helium"]]
+                 [:!!2 [:open "Ghostty"]]
+                 [:!!3 [:open "Zed"]]
+                 [:!!4 [:open "Legcord"]]]}
+
+        ;; Section: Navigation shortcuts
+        {:des "Hyper Key Navigation (IJKL Arrow Pad, U/O Page Up/Down)"
+         :rules [[:!!i :up_arrow]
+                 [:!!j :left_arrow]
+                 [:!!k :down_arrow]
+                 [:!!l :right_arrow]
+                 [:!!u :page_up]
+                 [:!!o :page_down]]}]}

@@ -1,0 +1,146 @@
+// ~/.config/zed/settings.json
+{
+  // Editing ergonomics
+  "vim_mode": true,
+  "autosave": "on_focus_change",
+  "auto_signature_help": true,
+
+  // TS/JS devs usually benefit from inlay hints
+  "inlay_hints": {
+    "enabled": true,
+    "show_type_hints": true,
+    "show_parameter_hints": true,
+    "show_other_hints": true,
+    "show_background": false,
+  },
+
+  // UI
+  "icon_theme": "Colored Zed Icons Theme Dark",
+  "ui_font_size": 16,
+  "buffer_font_size": 16,
+  "theme": {
+    "mode": "system",
+    "light": "One Light",
+    "dark": "One Dark - Darkened",
+  },
+
+  // Privacy
+  "telemetry": {
+    "metrics": false,
+    "diagnostics": false,
+  },
+
+  // Edit predictions (modern setting key)
+  "features": {
+    "edit_prediction_provider": "zed",
+  },
+
+  // Biome LSP (formatter + fixes for JS/TS when biome.json exists)
+  "lsp": {
+    "biome": {
+      "settings": {
+        "require_config_file": true,
+      },
+    },
+
+    // Optional: tune inlay hints specifically for Zed's default TS server (vtsls).
+    // These match Zed's documented structure; adjust to taste.
+    "vtsls": {
+      "settings": {
+        "typescript": {
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false,
+            },
+            "parameterTypes": { "enabled": true },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true,
+            },
+            "propertyDeclarationTypes": { "enabled": true },
+            "functionLikeReturnTypes": { "enabled": true },
+            "enumMemberValues": { "enabled": true },
+          },
+        },
+        "javascript": {
+          "inlayHints": {
+            "parameterNames": {
+              "enabled": "all",
+              "suppressWhenArgumentMatchesName": false,
+            },
+            "parameterTypes": { "enabled": true },
+            "variableTypes": {
+              "enabled": true,
+              "suppressWhenTypeMatchesName": true,
+            },
+            "propertyDeclarationTypes": { "enabled": true },
+            "functionLikeReturnTypes": { "enabled": true },
+            "enumMemberValues": { "enabled": true },
+          },
+        },
+      },
+    },
+  },
+
+  "languages": {
+    // Global-ish preferences for TS/JS projects
+    "TypeScript": {
+      // Let Biome own formatting; disable Prettier for TS in Zed
+      "prettier": { "allowed": false },
+
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+
+      // These two reduce noise in diffs across projects
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+
+      // Common TS default
+      "tab_size": 2,
+    },
+
+    "TSX": {
+      "prettier": { "allowed": false },
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+      "tab_size": 2,
+    },
+
+    "JavaScript": {
+      "prettier": { "allowed": false },
+      "format_on_save": "on",
+      "formatter": { "language_server": { "name": "biome" } },
+      "code_actions_on_format": {
+        "source.fixAll.biome": true,
+        "source.organizeImports.biome": true,
+      },
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+      "tab_size": 2,
+    },
+
+    // Keep your Python/Ruff setup, but simplify slightly and add the same whitespace hygiene
+    "Python": {
+      "language_servers": ["ruff"],
+      "format_on_save": "on",
+      "formatter": [
+        { "code_action": "source.organizeImports.ruff" },
+        { "code_action": "source.fixAll.ruff" },
+        { "language_server": { "name": "ruff" } },
+      ],
+      "remove_trailing_whitespace_on_save": true,
+      "ensure_final_newline_on_save": true,
+    },
+  },
+}
