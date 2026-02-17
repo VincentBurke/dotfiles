@@ -1,0 +1,92 @@
+tap "atlassian/acli"
+tap "koekeishiya/formulae"
+tap "sst/tap"
+tap "steipete/tap"
+tap "theboredteam/boring-notch"
+tap "yqrashawn/goku"
+# ARP scanning and fingerprinting tool
+brew "arp-scan"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
+# Bash, Zsh and Fish completion for Docker
+brew "docker-completion"
+# Modern, maintained replacement for ls
+brew "eza"
+# Play, record, convert, and stream select audio and video codecs
+brew "ffmpeg"
+# macOS CLI for managing custom icons for files and folders
+brew "fileicon"
+# Distributed revision control system
+brew "git"
+# Improved top (interactive process viewer)
+brew "htop"
+# Lightweight and flexible command-line JSON processor
+brew "jq"
+# Sudoless performance monitoring for Apple Silicon processors
+brew "macmon"
+# Deep clean and optimize your Mac
+brew "mole"
+# Manage multiple Node.js versions
+brew "nvm"
+# AI coding agent, built for the terminal
+brew "opencode"
+# SMART hard drive monitoring
+brew "smartmontools"
+# Cross-shell prompt for astronauts
+brew "starship"
+# Extremely fast Python package installer and resolver, written in Rust
+brew "uv"
+# Watch files and take action when they change
+brew "watchman"
+# Internet file retriever
+brew "wget"
+# Feature-rich command-line audio/video downloader
+brew "yt-dlp"
+# Programming language designed for robustness, optimality, and clarity
+brew "zig"
+# Software to interact with Atlassian Cloud from the terminal
+brew "atlassian/acli/acli"
+# A tiling window manager for macOS based on binary space partitioning.
+brew "koekeishiya/formulae/yabai"
+# karabiner configurator
+brew "yqrashawn/goku/goku"
+# OpenAI's coding agent that runs in your terminal
+cask "codex"
+cask "font-hack-nerd-font"
+cask "font-jetbrains-mono"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Free and open-source media player
+cask "iina"
+# Keyboard customiser
+cask "karabiner-elements"
+# GPU-based terminal emulator
+cask "kitty"
+# Clipboard manager
+cask "maccy"
+# Intercept, modify, replay, save HTTP/S traffic
+cask "mitmproxy"
+# Simple application that will prevent iTunes or Apple Music from launching
+cask "notunes"
+# Open-source software for live streaming and screen recording
+cask "obs"
+# AI coding agent desktop client
+cask "opencode-desktop"
+# Replacement for Docker Desktop
+cask "orbstack"
+# Move and resize windows using keyboard shortcuts or snap areas
+cask "rectangle"
+# Tool to reverse the direction of scrolling
+cask "scroll-reverser"
+# Instant messaging application focusing on security
+cask "signal"
+# Menu bar manager
+cask "thaw"
+# Google Chromium, sans integration with Google
+cask "ungoogled-chromium"
+# Multimedia player
+cask "vlc"
+# Binary releases of VS Code without MS branding/telemetry/licensing
+cask "vscodium"
+# REST, GraphQL and gRPC client
+cask "yaak"

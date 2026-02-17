@@ -206,6 +206,44 @@ _nvm_auto_use() {
 add-zsh-hook chpwd _nvm_auto_use
 
 
+
+# Update dotfiles
+update-dotfiles() {
+  set -euo pipefail
+
+  local msg="${*:-Update dotfiles}"
+  local brewfile="$HOME/.config/homebrew/Brewfile"
+
+  # 1) You edited files in $HOME; copy changes back into chezmoi source state
+  chezmoi re-add  # updates source for all modified managed files :contentReference[oaicite:1]{index=1}
+
+  # 2) Update Brewfile (explicit installs, not deps)
+  if command -v brew >/dev/null 2>&1; then
+    mkdir -p "$(dirname "$brewfile")"
+
+    # brew bundle dump effectively uses "installed-on-request" (excludes deps) :contentReference[oaicite:2]{index=2}
+    brew bundle dump \
+      --file="$brewfile" \
+      --force \
+      --describe \
+      --formula --cask --tap
+
+    # Ensure chezmoi tracks it (safe if already added)
+    chezmoi add "$brewfile" >/dev/null 2>&1 || true
+  fi
+
+  # 3) Commit + push if anything changed in the chezmoi repo
+  if [[ -z "$(chezmoi git -- status --porcelain)" ]]; then
+    echo "No dotfile changes to push."
+    return 0
+  fi
+
+  chezmoi git -- add -A
+  chezmoi git -- commit -m "$msg"
+  chezmoi git -- push
+}
+
+
 # ------------------ MUST BE LAST ------------------
 # zsh-syntax-highlighting should be sourced at the very end.
 ZSH_HIGHLIGHTING="${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh"
