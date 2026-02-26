@@ -1,4 +1,5 @@
 tap "atlassian/acli"
+tap "jsattler/tap"
 tap "koekeishiya/formulae"
 tap "sst/tap"
 tap "steipete/tap"
@@ -8,10 +9,14 @@ tap "yqrashawn/goku"
 brew "arp-scan"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Cross-platform make
+brew "cmake"
 # Bash, Zsh and Fish completion for Docker
 brew "docker-completion"
 # Modern, maintained replacement for ls
 brew "eza"
+# Like neofetch, but much faster because written mostly in C
+brew "fastfetch"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # macOS CLI for managing custom icons for files and folders
@@ -22,6 +27,8 @@ brew "git"
 brew "htop"
 # Lightweight and flexible command-line JSON processor
 brew "jq"
+# Handy way to save and run project-specific commands
+brew "just"
 # Sudoless performance monitoring for Apple Silicon processors
 brew "macmon"
 # Deep clean and optimize your Mac
@@ -50,6 +57,8 @@ brew "atlassian/acli/acli"
 brew "koekeishiya/formulae/yabai"
 # karabiner configurator
 brew "yqrashawn/goku/goku"
+# The macOS screen recorder you deserve - always free and open source
+cask "jsattler/tap/bettercapture"
 # OpenAI's coding agent that runs in your terminal
 cask "codex"
 cask "font-hack-nerd-font"

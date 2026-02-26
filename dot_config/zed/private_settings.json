@@ -1,6 +1,15 @@
 // ~/.config/zed/settings.json
 {
   // Editing ergonomics
+  "cursor_tail": {
+    "minimum_distance_multiplier": 0.8,
+    "profile": "custom",
+    "enabled": true
+  },
+  "terminal": {
+    "font_size": 16.0
+  },
+  "cursor_shape": "bar",
   "vim_mode": true,
   "autosave": "off",
   "auto_signature_help": true,
@@ -31,6 +40,7 @@
   },
 
   // UI
+  "use_system_window_tabs": true,
   "icon_theme": "Colored Zed Icons Theme Dark",
   "ui_font_size": 16,
   "buffer_font_size": 16,

@@ -9,21 +9,27 @@
          :rules [[:escape :!Oescape :safari]]}
 
         ;; Section: Modifier behavior
-        {:des "Caps Lock: tap = Escape, hold = Hyper (Cmd+Ctrl+Opt+Shift)"
-         :rules [[:##caps_lock :!CTOleft_shift nil {:alone :escape}]]}
+        {:des "Caps Lock: tap = Escape, hold = Meh (Ctrl+Opt+Shift)"
+         :rules [[:##caps_lock :!TOleft_shift nil {:alone :escape}]]}
 
         ;; Section: App launcher shortcuts
-        {:des "Hyper Key App Switcher"
-         :rules [[:!!1 [:open "Helium"]]
-                 [:!!2 [:open "Ghostty"]]
-                 [:!!3 [:open "Zed"]]
-                 [:!!4 [:open "Legcord"]]]}
+        {:des "Caps (Meh) App Switcher"
+         :rules [[:!TOS1 [:open "Helium"]]
+                 [:!TOS2 [:open "Ghostty"]]
+                 [:!TOS3 [:open "Zed"]]
+                 [:!TOS4 [:open "Codex"]]]}
 
         ;; Section: Navigation shortcuts
-        {:des "Hyper Key Navigation (IJKL Arrow Pad, U/O Page Up/Down)"
-         :rules [[:!!i :up_arrow]
-                 [:!!j :left_arrow]
-                 [:!!k :down_arrow]
-                 [:!!l :right_arrow]
-                 [:!!u :page_up]
-                 [:!!o :page_down]]}]}
+        {:des "Caps (Meh) Navigation (IJKL Arrow Pad, U/O Page Up/Down)"
+         :rules [[:!TOSi :up_arrow]
+                 [:!TOSj :left_arrow]
+                 [:!TOSk :down_arrow]
+                 [:!TOSl :right_arrow]
+                 [:!TOSu :page_up]
+                 [:!TOSo :page_down]]}
+
+        ;; Section: Rectangle window management (Caps+Cmd)
+        {:des "Rectangle: Caps+Cmd+J/L/K = Left/Right/Maximize"
+         :rules [[:!!j :!TOleft_arrow]
+                 [:!!l :!TOright_arrow]
+                 [:!!k :!TOreturn_or_enter]]}]}

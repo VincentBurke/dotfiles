@@ -5,13 +5,18 @@ window-padding-y = 10
 background-opacity = 0.92
 background-blur = 20
 
+# Start new windows maximized (covers the screen without macOS “fullscreen spaces”).
+maximize = true
+
 # macOS titlebar styling (transparent is the default, but set explicitly here).
 macos-titlebar-style = transparent
 
 # ------------------ CURSOR ------------------
 # Default cursor when programs don't request one.
-# Shell integration can still switch cursor at prompts.
-cursor-style = bar
+custom-shader-animation = always
+cursor-style = block
+cursor-style-blink = false
+custom-shader = shaders/cursor_tail.glsl
 
 # Enable option+click prompt cursor repositioning (requires shell integration + prompt marking).
 cursor-click-to-move = true
@@ -40,7 +45,8 @@ shell-integration = detect
 
 # Keep useful behaviors, and improve SSH compatibility:
 # - ssh-env converts TERM when needed and propagates TERM_PROGRAM vars.
-shell-integration-features = cursor,title,sudo,ssh-env
+# - no-cursor disables the “prompt forces bar cursor” behavior so cursor-style=block wins at the prompt.
+shell-integration-features = title,sudo,ssh-env,no-cursor
 
 # ------------------ QUICK TERMINAL (DROP-DOWN) ------------------
 # Toggle Quake-style terminal anywhere with Cmd+` (backquote).
@@ -55,9 +61,6 @@ macos-option-as-alt = true
 # Automatically enable Secure Input on detected password prompts, and show an indicator.
 macos-auto-secure-input = true
 macos-secure-input-indication = true
-
-
-
 
 # Make Cmd+N open a new tab
 keybind = cmd+n=new_tab

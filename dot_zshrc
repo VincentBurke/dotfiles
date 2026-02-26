@@ -116,6 +116,9 @@ ip() {
 # Prefer bunx over npx so this doesn't trigger nvm/node initialization
 alias loc="bunx sloc --format cli-table --format-option head --exclude 'build|\\.svg$|\\.xml$' ./"
 
+
+alias ccusage='bunx @ccusage/codex@latest'
+
 # Git
 alias gits='git status'
 alias gitd='git diff'
@@ -242,7 +245,6 @@ update-dotfiles() {
   chezmoi git -- commit -m "$msg"
   chezmoi git -- push
 }
-
 
 # ------------------ MUST BE LAST ------------------
 # zsh-syntax-highlighting should be sourced at the very end.

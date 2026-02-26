@@ -27,7 +27,7 @@
           "type" : "basic"
         } ]
       }, {
-        "description" : "Caps Lock: tap = Escape, hold = Hyper (Cmd+Ctrl+Opt+Shift)",
+        "description" : "Caps Lock: tap = Escape, hold = Meh (Ctrl+Opt+Shift)",
         "manipulators" : [ {
           "to_if_alone" : [ {
             "key_code" : "escape"
@@ -40,17 +40,17 @@
           },
           "to" : [ {
             "key_code" : "left_shift",
-            "modifiers" : [ "left_command", "left_control", "left_option" ]
+            "modifiers" : [ "left_control", "left_option" ]
           } ],
           "type" : "basic"
         } ]
       }, {
-        "description" : "Hyper Key App Switcher",
+        "description" : "Caps (Meh) App Switcher",
         "manipulators" : [ {
           "from" : {
             "key_code" : "1",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -61,7 +61,7 @@
           "from" : {
             "key_code" : "2",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -72,7 +72,7 @@
           "from" : {
             "key_code" : "3",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -83,21 +83,21 @@
           "from" : {
             "key_code" : "4",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
-            "shell_command" : "open -a 'Legcord'"
+            "shell_command" : "open -a 'Codex'"
           } ],
           "type" : "basic"
         } ]
       }, {
-        "description" : "Hyper Key Navigation (IJKL Arrow Pad, U/O Page Up/Down)",
+        "description" : "Caps (Meh) Navigation (IJKL Arrow Pad, U/O Page Up/Down)",
         "manipulators" : [ {
           "from" : {
             "key_code" : "i",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -108,7 +108,7 @@
           "from" : {
             "key_code" : "j",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -119,7 +119,7 @@
           "from" : {
             "key_code" : "k",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -130,7 +130,7 @@
           "from" : {
             "key_code" : "l",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -141,7 +141,7 @@
           "from" : {
             "key_code" : "u",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
@@ -152,11 +152,50 @@
           "from" : {
             "key_code" : "o",
             "modifiers" : {
-              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+              "mandatory" : [ "left_control", "left_option", "left_shift" ]
             }
           },
           "to" : [ {
             "key_code" : "page_down"
+          } ],
+          "type" : "basic"
+        } ]
+      }, {
+        "description" : "Rectangle: Caps+Cmd+J/L/K = Left/Right/Maximize",
+        "manipulators" : [ {
+          "from" : {
+            "key_code" : "j",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "left_arrow",
+            "modifiers" : [ "left_control", "left_option" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "l",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "right_arrow",
+            "modifiers" : [ "left_control", "left_option" ]
+          } ],
+          "type" : "basic"
+        }, {
+          "from" : {
+            "key_code" : "k",
+            "modifiers" : {
+              "mandatory" : [ "left_command", "left_control", "left_option", "left_shift" ]
+            }
+          },
+          "to" : [ {
+            "key_code" : "return_or_enter",
+            "modifiers" : [ "left_control", "left_option" ]
           } ],
           "type" : "basic"
         } ]
