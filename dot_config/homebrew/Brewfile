@@ -1,16 +1,21 @@
 tap "atlassian/acli"
 tap "jsattler/tap"
 tap "koekeishiya/formulae"
+tap "lassejlv/termy", "https://github.com/lassejlv/termy"
 tap "sst/tap"
 tap "steipete/tap"
 tap "theboredteam/boring-notch"
 tap "yqrashawn/goku"
 # ARP scanning and fingerprinting tool
 brew "arp-scan"
+# Resource monitor. C++ version and continuation of bashtop and bpytop
+brew "btop"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
 # Cross-platform make
 brew "cmake"
+# Command-line csv viewer
+brew "csvlens"
 # Bash, Zsh and Fish completion for Docker
 brew "docker-completion"
 # Modern, maintained replacement for ls
@@ -21,6 +26,10 @@ brew "fastfetch"
 brew "ffmpeg"
 # macOS CLI for managing custom icons for files and folders
 brew "fileicon"
+# Fast and simple Node.js version manager
+brew "fnm"
+# Command-line fuzzy finder written in Go
+brew "fzf"
 # Distributed revision control system
 brew "git"
 # Improved top (interactive process viewer)
@@ -33,14 +42,14 @@ brew "just"
 brew "macmon"
 # Deep clean and optimize your Mac
 brew "mole"
-# Manage multiple Node.js versions
-brew "nvm"
 # AI coding agent, built for the terminal
 brew "opencode"
 # SMART hard drive monitoring
 brew "smartmontools"
 # Cross-shell prompt for astronauts
 brew "starship"
+# Terminal multiplexer
+brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
 # Watch files and take action when they change
@@ -51,6 +60,8 @@ brew "wget"
 brew "yt-dlp"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
+# Shell extension to navigate your filesystem faster
+brew "zoxide"
 # Software to interact with Atlassian Cloud from the terminal
 brew "atlassian/acli/acli"
 # A tiling window manager for macOS based on binary space partitioning.

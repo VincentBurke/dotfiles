@@ -1,6 +1,6 @@
 # ~/.zshrc
 # Readable, macOS-friendly, with safer PATH handling, better history, faster completions,
-# hardened aliases, and your existing lazy-loaded NVM approach.
+# hardened aliases, and fnm-managed Node + zoxide + fzf.
 
 # ------------------ MACOS / HOMEBREW ------------------
 # Ensure Homebrew (Apple Silicon / Intel) is available early so brew-installed tools resolve.
@@ -35,6 +35,7 @@ export EDITOR="${EDITOR:-vim}"
 # Comment out to disable case sensitivite auto complete
 CASE_SENSITIVE="true"
 
+
 # ------------------ PATHS / EXPORTS ------------------
 # Use zsh's `path` array + de-dupe. Only add dirs that exist.
 typeset -U path PATH
@@ -48,12 +49,29 @@ path_prepend "$BUN_INSTALL/bin"
 export DENO_INSTALL="$HOME/.deno"
 path_prepend "$DENO_INSTALL/bin"
 
-# NVM (lazy-loaded below)
-export NVM_DIR="$HOME/.nvm"
-
 # Other custom tooling
 path_prepend "$HOME/.antigravity/antigravity/bin"
 
+
+# ------------------ FNM (Fast Node Manager) ------------------
+# Shell integration:
+# - adds fnm-managed Node binaries to PATH
+# - auto-switches versions on cd when it sees .nvmrc or .node-version
+if (( $+commands[fnm] )); then
+  eval "$(fnm env --use-on-cd --shell zsh)"
+fi
+
+# ------------------ ZOXIDE ------------------
+# smarter cd; provides `z` (and optionally `zi`)
+if (( $+commands[zoxide] )); then
+  eval "$(zoxide init zsh)"
+fi
+
+# Quick interactive jump (zi exists when zoxide+fzf are available; alias is harmless either way)
+alias zz='zi'
+
+# Show top-ranked dirs (good for discovering what zoxide has learned)
+alias ztop='zoxide query -ls | head -n 30'
 
 # ------------------ OH MY ZSH ------------------
 export ZSH="$HOME/.oh-my-zsh"
@@ -61,7 +79,6 @@ export ZSH="$HOME/.oh-my-zsh"
 # Keep plugins short; autosuggestions is a big win for QOL.
 plugins=(
   git
-  bun
   zsh-autosuggestions
 )
 
@@ -84,11 +101,17 @@ zstyle ':completion:*' matcher-list \
   'm:{a-zA-Z}={A-Za-z}' \
   'r:|[._-]=* r:|=*'
 
+# ------------------ FZF ------------------
+# Key bindings + fuzzy completion for zsh
+if (( $+commands[fzf] )); then
+  source <(fzf --zsh)
+fi
+
 
 # ------------------ ALIASES ------------------
 # eza (modern ls) aliases, only if installed
 if (( $+commands[eza] )); then
-  alias ls='eza'
+  alias ls='eza --icons --grid --group-directories-first'
   alias ll='eza -l'
   alias la='eza -la'
   alias lt='eza -T'
@@ -113,10 +136,8 @@ ip() {
   [[ -n "$iface" ]] && ipconfig getifaddr "$iface"
 }
 
-# Prefer bunx over npx so this doesn't trigger nvm/node initialization
+# Prefer bunx over npx so this doesn't trigger node toolchain init
 alias loc="bunx sloc --format cli-table --format-option head --exclude 'build|\\.svg$|\\.xml$' ./"
-
-
 alias ccusage='bunx @ccusage/codex@latest'
 
 # Git
@@ -171,45 +192,6 @@ if (( $+commands[starship] )); then
 fi
 
 
-# ------------------ LAZY LOAD NVM ------------------
-# Loads nvm (and therefore node/npm/npx/pnpm) only when first used.
-
-load_nvm() {
-  # Remove placeholder wrappers
-  unset -f nvm node npm npx pnpm 2>/dev/null
-
-  # Source nvm from Homebrew if present; fall back to $NVM_DIR (curl install)
-  if command -v brew >/dev/null 2>&1; then
-    local brew_nvm_sh
-    brew_nvm_sh="$(brew --prefix nvm 2>/dev/null)/nvm.sh"
-    [[ -s "$brew_nvm_sh" ]] && . "$brew_nvm_sh"
-  fi
-  [[ -s "$NVM_DIR/nvm.sh" ]] && . "$NVM_DIR/nvm.sh"
-
-  # Ensure an NVM Node is active if possible (prevents using system node unexpectedly)
-  command -v nvm >/dev/null 2>&1 && nvm use --silent default >/dev/null 2>&1 || true
-
-  # Execute originally requested command
-  "$@"
-}
-
-# Placeholder wrappers (trigger nvm load on first run)
-nvm()  { load_nvm nvm  "$@"; }
-node() { load_nvm node "$@"; }
-npm()  { load_nvm npm  "$@"; }
-npx()  { load_nvm npx  "$@"; }
-pnpm() { load_nvm pnpm "$@"; }
-
-# Optional: auto-activate .nvmrc on directory change (will lazy-load nvm on first hit)
-autoload -Uz add-zsh-hook
-_nvm_auto_use() {
-  [[ -f .nvmrc ]] || return 0
-  load_nvm nvm use --silent >/dev/null 2>&1 || true
-}
-add-zsh-hook chpwd _nvm_auto_use
-
-
-
 # Update dotfiles
 update-dotfiles() {
   set -euo pipefail
@@ -218,13 +200,12 @@ update-dotfiles() {
   local brewfile="$HOME/.config/homebrew/Brewfile"
 
   # 1) You edited files in $HOME; copy changes back into chezmoi source state
-  chezmoi re-add  # updates source for all modified managed files :contentReference[oaicite:1]{index=1}
+  chezmoi re-add
 
   # 2) Update Brewfile (explicit installs, not deps)
   if command -v brew >/dev/null 2>&1; then
     mkdir -p "$(dirname "$brewfile")"
 
-    # brew bundle dump effectively uses "installed-on-request" (excludes deps) :contentReference[oaicite:2]{index=2}
     brew bundle dump \
       --file="$brewfile" \
       --force \
@@ -245,6 +226,31 @@ update-dotfiles() {
   chezmoi git -- commit -m "$msg"
   chezmoi git -- push
 }
+
+# TEMY SHELL INTEGRATION
+if [[ "${TERMY_SHELL_INTEGRATION:-0}" == "1" ]]; then
+  _termy_emit_tab_title() {
+    local kind="$1"
+    shift
+    local payload="$*"
+    local prefix="${TERMY_TAB_TITLE_PREFIX:-termy:tab:}"
+    payload=${payload//$'\n'/ }
+    payload=${payload//$'\r'/ }
+    printf '\033]2;%s%s:%s\007' "$prefix" "$kind" "$payload"
+  }
+
+  _termy_prompt_title() {
+    _termy_emit_tab_title "prompt" "${PWD/#$HOME/~}"
+  }
+
+  _termy_command_title() {
+    _termy_emit_tab_title "command" "$1"
+  }
+
+  autoload -Uz add-zsh-hook
+  add-zsh-hook precmd _termy_prompt_title
+  add-zsh-hook preexec _termy_command_title
+fi
 
 # ------------------ MUST BE LAST ------------------
 # zsh-syntax-highlighting should be sourced at the very end.

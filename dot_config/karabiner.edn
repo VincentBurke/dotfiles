@@ -15,7 +15,7 @@
         ;; Section: App launcher shortcuts
         {:des "Caps (Meh) App Switcher"
          :rules [[:!TOS1 [:open "Helium"]]
-                 [:!TOS2 [:open "Ghostty"]]
+                 [:!TOS2 [:open "Termy"]]
                  [:!TOS3 [:open "Zed"]]
                  [:!TOS4 [:open "Codex"]]]}
 

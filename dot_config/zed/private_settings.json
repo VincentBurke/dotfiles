@@ -4,10 +4,10 @@
   "cursor_tail": {
     "minimum_distance_multiplier": 0.8,
     "profile": "custom",
-    "enabled": true
+    "enabled": true,
   },
   "terminal": {
-    "font_size": 16.0
+    "font_size": 16.0,
   },
   "cursor_shape": "bar",
   "vim_mode": true,
@@ -127,6 +127,9 @@
   },
 
   "languages": {
+    "Rust": {
+      "enable_language_server": false,
+    },
     // TS/JS: use vtsls for type-aware IDE features, use Biome for formatting + fix/organize imports
     "TypeScript": {
       "language_servers": ["vtsls", "!typescript-language-server", "..."],
