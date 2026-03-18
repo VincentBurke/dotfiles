@@ -44,6 +44,8 @@ brew "macmon"
 brew "mole"
 # AI coding agent, built for the terminal
 brew "opencode"
+# Fast Zsh prompt with instant prompt support
+brew "powerlevel10k"
 # SMART hard drive monitoring
 brew "smartmontools"
 # Cross-shell prompt for astronauts
@@ -60,6 +62,10 @@ brew "wget"
 brew "yt-dlp"
 # Programming language designed for robustness, optimality, and clarity
 brew "zig"
+# Fish-style autosuggestions for Zsh without the oh-my-zsh framework
+brew "zsh-autosuggestions"
+# Syntax highlighting for Zsh without the oh-my-zsh framework
+brew "zsh-syntax-highlighting"
 # Shell extension to navigate your filesystem faster
 brew "zoxide"
 # Software to interact with Atlassian Cloud from the terminal
