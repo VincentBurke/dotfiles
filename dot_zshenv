@@ -1,0 +1,18 @@
+if [[ -r "$HOME/.cargo/env" ]]; then
+  . "$HOME/.cargo/env"
+fi
+
+if [[ -r "$HOME/.local/share/bob/env/env.sh" ]]; then
+  . "$HOME/.local/share/bob/env/env.sh"
+fi
+
+# uv
+case ":$PATH:" in
+  *":$HOME/.local/bin:"*) ;;
+  *) export PATH="$HOME/.local/bin:$PATH" ;;
+esac
+
+# Vite+ bin (https://viteplus.dev)
+if [[ -r "$HOME/.vite-plus/env" ]]; then
+  . "$HOME/.vite-plus/env"
+fi
