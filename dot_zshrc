@@ -1,6 +1,6 @@
 # ~/.zshrc
 # Readable, macOS-friendly, with safer PATH handling, better history, faster completions,
-# hardened aliases, and fnm-managed Node + zoxide + fzf.
+# hardened aliases, and Vite+-managed Node + zoxide + fzf.
 
 # Prompt preset. Valid values:
 # - p10k: current fast Powerlevel10k prompt with instant prompt
@@ -19,7 +19,6 @@ if [[ -x /opt/homebrew/bin/brew ]]; then
 elif [[ -x /usr/local/bin/brew ]]; then
   eval "$(/usr/local/bin/brew shellenv)"
 fi
-
 
 # ------------------ BASIC OPTIONS & HISTORY ------------------
 # Good defaults for developer workflows: shared history, fewer dupes, less noise.
@@ -66,14 +65,33 @@ path_prepend "$DENO_INSTALL/bin"
 # Other custom tooling
 path_prepend "$HOME/.antigravity/antigravity/bin"
 
+# Keep Vite+ shims first so managed node/npm/npx/vp win PATH resolution.
+path_prepend "$HOME/.vite-plus/bin"
 
-# ------------------ FNM (Fast Node Manager) ------------------
+# Drop stale fnm variables inherited from older shells now that Vite+ owns Node.
+unset FNM_ARCH FNM_COREPACK_ENABLED FNM_DIR FNM_LOGLEVEL FNM_MULTISHELL_PATH
+unset FNM_NODE_DIST_MIRROR FNM_RESOLVE_ENGINES FNM_VERSION_FILE_STRATEGY
+
+
+# ------------------ LEGACY NODE TOOLCHAIN (DISABLED) ------------------
+# Re-enable this block to restore the previous fnm + PNPM_HOME setup.
+# Vite+ is now the active runtime manager via ~/.zshenv.
+#
+# FNM (Fast Node Manager)
 # Shell integration:
 # - adds fnm-managed Node binaries to PATH
 # - auto-switches versions on cd when it sees .nvmrc or .node-version
-if (( $+commands[fnm] )); then
-  eval "$(fnm env --use-on-cd --shell zsh)"
-fi
+# if (( $+commands[fnm] )); then
+#   eval "$(fnm env --use-on-cd --shell zsh)"
+# fi
+#
+# pnpm
+# export PNPM_HOME="$HOME/Library/pnpm"
+# case ":$PATH:" in
+#   *":$PNPM_HOME:"*) ;;
+#   *) export PATH="$PNPM_HOME:$PATH" ;;
+# esac
+# pnpm end
 
 # ------------------ ZOXIDE ------------------
 # smarter cd; provides `z` (and optionally `zi`)
@@ -313,11 +331,3 @@ if [[ -n "$ZSH_SYNTAX_HIGHLIGHTING" ]]; then
 else
   print -u2 "zsh-syntax-highlighting not found. Install the Homebrew formula."
 fi
-
-# pnpm
-export PNPM_HOME="$HOME/Library/pnpm"
-case ":$PATH:" in
-  *":$PNPM_HOME:"*) ;;
-  *) export PATH="$PNPM_HOME:$PATH" ;;
-esac
-# pnpm end
